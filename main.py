@@ -147,21 +147,6 @@ if url and no_of_sentences and st.button('Summarize News Article'):
 
     st.table(df)
 
-
-
-def print_usage():
-    # Display the parameters and what they mean.
-    st.write('''
-    Usage:
-        summarize.py <wiki-url> <summary length>
-    Explanation:
-        Parameter 1: Wikipedia URL to pull
-        Parameter 2: the number of words for the summary to contain
-    ''')
-
 if wikiurl and no_of_sentences and st.button('Summarize WikiPedia Page'):
-    if not str(no_of_sentences).isdigit():
-        print_usage()
-    else:
         wikiSummarize(wikiurl, int(no_of_sentences))
 

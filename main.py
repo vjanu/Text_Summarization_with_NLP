@@ -2,6 +2,7 @@ import streamlit as st
 from txtSummary import textfunc
 from ytSummary import textforYT
 from newsSummary import summarize
+from wikiSummary import wikiSummarize
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -90,9 +91,10 @@ st.sidebar.markdown('<center> <h5>Dharani Priya Ravi</h5></center>',unsafe_allow
 st.sidebar.markdown('<center> <h4>Presented to: Prof. Dan Wu</h4></center>',unsafe_allow_html=True)
 
 url = st.text_input('\nProvide the URL of a News Article: ')
-txtArticle = st.text_area('\nProvide the an Article or Paragraph you want to summarize: ',height=380)
-video_id = st.text_input("\nProvide the  a Youtube Video Id: ")
-no_of_sentences = st.number_input('Choose the no. of sentences for the summary: ', min_value = 1)
+txtArticle = st.text_area('\nProvide the Article or Paragraph you want to summarize: ',height=300)
+wikiurl = st.text_input('\nProvide the URL of Wikipedia: ')
+video_id = st.text_input("\nProvide the Youtube Video Id: ")
+no_of_sentences = st.number_input('Choose the no. of sentences/words for the summary: ', min_value = 1)
 
 if video_id and no_of_sentences and st.button('Summarize YouTube Video'):
     if not str(no_of_sentences).isdigit():
@@ -129,7 +131,7 @@ if url and no_of_sentences and st.button('Summarize News Article'):
     sent_scores = score_sentences(sents, freq_dist)
     summary, summary_sent_scores = summarize(sent_scores, no_of_sentences)
     
-    st.subheader('Summarised text: ')
+    st.subheader('Summarized Text: ')
     st.write(summary)
     
     subh = 'Summary sentence score for the top ' + str(no_of_sentences) + ' sentences: '
@@ -145,4 +147,21 @@ if url and no_of_sentences and st.button('Summarize News Article'):
 
     st.table(df)
 
+
+
+def print_usage():
+    # Display the parameters and what they mean.
+    st.write('''
+    Usage:
+        summarize.py <wiki-url> <summary length>
+    Explanation:
+        Parameter 1: Wikipedia URL to pull
+        Parameter 2: the number of words for the summary to contain
+    ''')
+
+if wikiurl and no_of_sentences and st.button('Summarize WikiPedia Page'):
+    if not str(no_of_sentences).isdigit():
+        print_usage()
+    else:
+        wikiSummarize(wikiurl, int(no_of_sentences))
 

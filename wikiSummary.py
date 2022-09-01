@@ -23,6 +23,7 @@ from heapq import nlargest
 from collections import defaultdict
 import nltk
 
+#method to summarize wikipedia content
 def wikiSummarize(url_topull, num_of_words):
     
     scraped_data = urllib.request.urlopen(url_topull)  
@@ -49,6 +50,7 @@ def wikiSummarize(url_topull, num_of_words):
     
     print_pretty (summary,keywords_names)
 
+#method to beautify the content displayed
 def print_pretty (summary, keywords_names):
     columns = os.get_terminal_size().columns
     

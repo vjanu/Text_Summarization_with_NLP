@@ -22,6 +22,7 @@ from heapq import nlargest
 from collections import defaultdict
 import nltk
 
+#method to call the base summarization method
 def textfunc(textfield123,no_of_sentences):
 
     content = textfield123
@@ -33,6 +34,7 @@ def textfunc(textfield123,no_of_sentences):
     st.write(summarize2(sent_ranks, sent_tokens, no_of_sentences))
     text = str(summarize2(sent_ranks, sent_tokens, no_of_sentences))
 
+#method to tokenize words removing stop words
 def tokenize_content(content):
     stop_words = set(stopwords.words('english') + list(punctuation))
     words = word_tokenize(content.lower())
@@ -56,6 +58,7 @@ def sanitize_input(data):
     }
     return data.translate(replace)
 
+#base method used to summarize the content
 def summarize2(ranks, sentences, length):
 
     if int(length) > len(sentences):

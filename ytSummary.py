@@ -23,6 +23,7 @@ from heapq import nlargest
 from collections import defaultdict
 import nltk
 
+#extract the subtitle from the video
 def textforYT(video_id, no_of_sentences):
     vurl = 'https://www.youtube.com/watch?v=%s' % video_id
     response = requests.get(vurl).text
@@ -54,6 +55,7 @@ def score_tokens(sent_tokens, word_tokens):
                 rank[i] += word_freq[word]
     return rank
 
+#base method used to summarize the content
 def summarize2(ranks, sentences, length):
 
     if int(length) > len(sentences):

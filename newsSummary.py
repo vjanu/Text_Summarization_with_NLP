@@ -26,6 +26,7 @@ import nltk
 from newspaper import Article
 import pyttsx3
 
+#method for word tokenizer
 def tokenizer(s):
     tokens = []
     for word in s.split(' '):
@@ -38,6 +39,7 @@ def sent_tokenizer(s):
         sents.append(sent.strip())
     return sents
 
+#method to count number of words in a passage
 def count_words(tokens):
     word_counts = {}
     for token in tokens:
@@ -57,6 +59,7 @@ def word_freq_distribution(word_counts):
         
     return freq_dist
 
+#method to calculate the custom distribution frequency
 def score_sentences(sents, freq_dist, max_len=40):
     sent_scores = {}  
     for sent in sents:
@@ -70,6 +73,7 @@ def score_sentences(sents, freq_dist, max_len=40):
                         sent_scores[sent] += freq_dist[word.lower()]
                         
     return sent_scores
+#method to summarize the news articles
 def summarize(sent_scores, k):
     top_sents = Counter(sent_scores) 
     summary = ''
